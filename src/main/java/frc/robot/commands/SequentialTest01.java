@@ -42,8 +42,8 @@ public class SequentialTest01 extends SequentialCommandGroup {
       // turn Left 90
       new EncoderTurnCommand(driveTrain, -84, 0.1),
 
-      // Forward 1.5
-      new EncoderDriveCommand(driveTrain, 2.5, 0.2),
+      // Forward 3
+      new EncoderDriveCommand(driveTrain, 3, 0.2),
 
       // turn Left 90
       new EncoderTurnCommand(driveTrain, -84, 0.1)
