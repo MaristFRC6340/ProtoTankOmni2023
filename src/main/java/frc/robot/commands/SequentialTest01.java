@@ -30,6 +30,9 @@ public class SequentialTest01 extends SequentialCommandGroup {
       // Turn 90 Degrees
       new EncoderTurnCommand(driveTrain, -86, 0.1),
 
+      // Aim Time - Point at Cone
+      new AimTimeCommand(driveTrain, 0.2, 2),
+
       // Forward 16 Feet
       new EncoderDriveCommand(driveTrain, 16, 0.4),
 
