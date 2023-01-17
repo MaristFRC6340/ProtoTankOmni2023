@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AimDriveCommand;
 import frc.robot.commands.AimTimeCommand;
 import frc.robot.commands.EncoderDriveCommand;
 import frc.robot.commands.EncoderTurnCommand;
@@ -71,5 +72,14 @@ public class RobotContainer {
   public Command getSequenceTest01() {
     return new SequentialTest01(driveTrain);
   }
+
+  public Command getAimDriveCommand() {
+    return new AimDriveCommand(driveTrain, .25, 3.0);
+  }
+
+  public Command getAimTimeCommand(){
+    return new AimTimeCommand(driveTrain, .25, 5);
+  }
+  
 
 }

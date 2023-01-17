@@ -20,30 +20,59 @@ public class AimDriveCommand extends CommandBase {
 
   private PhotonCamera camera = new PhotonCamera("Live!_Cam_Sync_HD_VF0770");
 
-  public AimDriveCommand(DriveTrain dtrain, double time) { //may need 2 powers for turn and drive
+  public AimDriveCommand(DriveTrain dtrain, double pwr, double time) { //may need 2 powers for turn and drive
     // Use addRequirements() here to declare subsystem dependencies.
 
     drivetrain = dtrain;
     duration = time;
-    //power = pwr; need 2?
+    power = pwr;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
-  //startTime = System.currentTimeMillis(); //VariableDeclaratorId expected
+  public void initialize() {
+  startTime = System.currentTimeMillis(); //VariableDeclaratorId expected
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    var result = camera.getLatestResult();
+
+    boolean hasTargets = result.hasTargets();
+
+    double turnError = 0;
+
+    if (hasTargets){
+    PhotonTrackedTarget target = result.getBestTarget();
+      turnError = target.getYaw();
+      System.out.println(turnError);
+    }
+
+    double kP = 0.02;
+  
+    double turnPower = power * turnError * kP;
+    if (turnPower > 0.2) {
+      turnPower = 0.2;
+    }
+    if (turnPower < -0.2){
+      turnPower = -0.2;
+    }
+    System.out.println(turnError*power);
+    drivetrain.drive(-turnPower, turnPower);
+
+  }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
+  public void end(boolean interrupted) {
+    drivetrain.drive(0, 0);
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    long endTime = startTime + (long)(duration*1000);
+
+    return System.currentTimeMillis() >= endTime;  
   }
 }

@@ -67,8 +67,9 @@ public class Robot extends TimedRobot {
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand(); // AimTime
     //m_autonomousCommand = m_robotContainer.getEncoderTurnCommand();
     //m_autonomousCommand = m_robotContainer.getEncoderDriveCommand();
-    m_autonomousCommand = m_robotContainer.getSequenceTest01();
-
+    //m_autonomousCommand = m_robotContainer.getSequenceTest01();
+    //m_autonomousCommand = m_robotContainer.getAimDriveCommand();
+    m_autonomousCommand = m_robotContainer.getAimTimeCommand();
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();

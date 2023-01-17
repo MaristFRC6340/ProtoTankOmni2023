@@ -33,7 +33,7 @@ public class SequentialTest01 extends SequentialCommandGroup {
       // Aim Time - Point at Cone
       new AimTimeCommand(driveTrain, 0.2, 2),
 
-      // Forward 16 Feet
+      // Forward 16 Feet - Hit Cone
       new EncoderDriveCommand(driveTrain, 16, 0.4),
 
       // Turn 180
